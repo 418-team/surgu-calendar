@@ -17,7 +17,9 @@ function swagger(fastify) {
             consumes: ['application/json'],
             produces: ['application/json'],
             tags: [
-                {name: 'oauth', description: 'Методы для авторизации OAuth2'}
+                {name: 'oauth', description: 'Методы для авторизации OAuth2'},
+                {name: 'events', description: 'Работа с событиями'},
+                {name: 'groups', description: 'Работа с группами пользователей'}
             ],
             securityDefinitions: {
                 OAuth2: {

@@ -6,12 +6,12 @@ const SQL = `
            e.end_date,
            e.picture_url,
 
-           (SELECT json_agg(t)
+           (SELECT coalesce(json_agg(t), '[]'::json)
             FROM events_tags et
                      JOIN tags t on t.id = et.tag_id
             WHERE et.event_id = e.id)           tags,
 
-           (SELECT json_agg(g2)
+           (SELECT coalesce(json_agg(g2), '[]'::json)
             FROM (SELECT g.id, g.title
                   FROM events_groups eg
                            JOIN groups g on g.id = eg.group_id

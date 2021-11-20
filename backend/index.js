@@ -37,6 +37,7 @@ fastify.get('/', function (request, reply) {
 
 fastify.addHook('preHandler', AuthCheck);
 fastify.register(require('./endpoints/events'));
+fastify.register(require('./endpoints/groups'));
 
 const start = async () => {
     try {
