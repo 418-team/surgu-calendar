@@ -16,6 +16,7 @@ const params = {
     schema: {
         tags: ['tags'],
         summary: 'Редактировать тег',
+        security: [{OAuth2: ['admin']}],
         params: {
             type: 'object',
             required: ['id'],

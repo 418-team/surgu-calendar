@@ -36,6 +36,9 @@ fastify.get('/', function (request, reply) {
 });
 
 fastify.addHook('preHandler', AuthCheck);
+fastify.register(require('./endpoints/oauth'));
+fastify.register(require('./endpoints/account'));
+fastify.register(require('./endpoints/users'));
 fastify.register(require('./endpoints/events'));
 fastify.register(require('./endpoints/tags'));
 fastify.register(require('./endpoints/groups'));

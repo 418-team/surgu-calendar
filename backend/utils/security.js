@@ -1,4 +1,4 @@
-const crypto = require('crypto')
+const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 
 function createHash(value) {
@@ -6,6 +6,16 @@ function createHash(value) {
         .createHash('sha256')
         .update(value + process.env.CRYPTO_SALT)
         .digest('hex');
+}
+
+function createSession(user) {
+    const jwtData = {uid: user.id, scopes: user.scopes};
+    const refreshData = {uid: user.id, refresh: 1};
+
+    return {
+        accessToken: jwt.sign(jwtData, process.env.JWT_SECRET_KEY, {expiresIn: '5m'}),
+        refreshToken: jwt.sign(refreshData, process.env.JWT_SECRET_KEY, {expiresIn: '5d'})
+    };
 }
 
 async function AuthCheck(request, reply) {
@@ -47,4 +57,4 @@ function isCorrectJWT(value) {
     }
 }
 
-module.exports = {createHash, AuthCheck, isCorrectJWT}
+module.exports = {createHash, AuthCheck, isCorrectJWT, createSession};

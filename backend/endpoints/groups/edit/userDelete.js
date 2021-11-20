@@ -22,6 +22,7 @@ async function handler(req, res) {
 const params = {
     schema: {
         tags: ['groups'],
+        security: [{OAuth2: ['admin']}],
         summary: 'Удалить пользователя из группы',
         params: {
             type: 'object',

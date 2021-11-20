@@ -6,6 +6,7 @@ async function handler(req, res) {
 const params = {
     schema: {
         tags: ['tags'],
+        security: [{OAuth2: ['admin']}],
         summary: 'Создать тег',
         body: {
             type: 'object',

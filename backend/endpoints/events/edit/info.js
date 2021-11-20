@@ -37,6 +37,7 @@ async function handler(req, res) {
 const params = {
     schema: {
         tags: ['events'],
+        security: [{OAuth2: ['admin']}],
         summary: 'Получить информацию о событии',
         params: {
             type: 'object',

@@ -16,6 +16,7 @@ async function handler(req, res) {
 const params = {
     schema: {
         tags: ['groups'],
+        security: [{OAuth2: ['admin']}],
         summary: 'Создать группу',
         body: {
             type: 'object',

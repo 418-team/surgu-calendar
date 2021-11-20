@@ -25,6 +25,7 @@ async function handler(req, res) {
 const params = {
     schema: {
         tags: ['events'],
+        security: [{OAuth2: ['admin']}],
         summary: 'Создать событие',
         body: {
             type: 'object',
