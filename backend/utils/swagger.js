@@ -19,6 +19,7 @@ function swagger(fastify) {
             tags: [
                 {name: 'oauth', description: 'Методы для авторизации OAuth2'},
                 {name: 'events', description: 'Работа с событиями'},
+                {name: 'tags', description: 'Работа с тегами для событий'},
                 {name: 'groups', description: 'Работа с группами пользователей'}
             ],
             securityDefinitions: {
