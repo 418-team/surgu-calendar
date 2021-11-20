@@ -1,15 +1,15 @@
 import Divider from '../../shared/Divider';
 
-const GetHeader = ({name, type}) => {
-    if(type === "eventName") return <h2>{name}</h2>
-    else if (type === "header") return <h3>{name}</h3>
-    else if (type === "label") return <h4>{name}</h4>
+const GetHeader = ({name, type, style}) => {
+    if(type === "eventName") return <h2 style={style}>{name}</h2>
+    else if (type === "header") return <h3 style={style}>{name}</h3>
+    else if (type === "label") return <h4 style={style}>{name}</h4>
 }
 
-const Header = ({name, type}) => {
+const Header = ({name, type, style}) => {
     return (
         <>
-            <GetHeader type={type} name={name}/>
+            <GetHeader type={type} name={name} style={style}/>
             <Divider/>
         </>
     )

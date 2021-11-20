@@ -9,8 +9,15 @@ import Home from './components/Home';
 import Header from "./components/Header/index"
 import { Event, Admin } from './components/Admin';
 import moment from 'moment';
+import axios from 'axios';
+
 
 function App() {
+    axios.defaults.baseURL = 'http://94.41.65.26';
+    axios.defaults.headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.access_token
+    };
     moment.locale("ru", [ruLocale])
   return (
     <div className="App">

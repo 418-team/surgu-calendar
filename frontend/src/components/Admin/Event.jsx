@@ -1,10 +1,22 @@
-import initialData from "../Home/mockFile.json"
 import { useState, useRef, useEffect, useCallback } from 'react';
-import LogArea from './LogArea';
 import Preview from './Preview/Preview';
 import { DynamicEditing } from './Preview/DynamicEditing';
 import  {Redirect} from 'react-router-dom';
 import "./Admin.css"
+import axios from 'axios';
+
+function debounce(func, wait, immediate) {
+    let timeout;
+    return function() {
+        const context = this, args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(function() {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        }, wait);
+        if (immediate && !timeout) func.apply(context, args);
+    };
+}
 
 const useStateCallback = (initialState) => {
     const [state, setState] = useState(initialState);
@@ -23,45 +35,38 @@ const useStateCallback = (initialState) => {
     return [state, setStateCallback];
 }
 
-function safeJsonParse(str) {
-    try {
-        return [null, JSON.parse(str)];
-    } catch (err) {
-        return [err];
-    }
-}
 
 const Event = ({match}) => {
     const id = match.params.id
-    console.log(id)
-    console.log(initialData)
-    const item = initialData?.find((i) => i.id === parseInt(id))
-    const [data, setData] = useStateCallback(item || null)
-    const [text, setText] = useState(JSON.stringify(data, null, 2))
+    const [data, setData] = useStateCallback({})
 
-
-    const changeText = (value) => setText(value)
-
-    const handleJson = () => {
-        const [err, result] = safeJsonParse(text);
-        if (err) {
-            return false;
-        }
-        setData(result);
-        return true;
-    };
+    useEffect(() => {
+            axios.get(`/events/${id}`).then((res) => {
+                const data = {...res.data.event, data: JSON.parse(res.data.event?.data || "[]")}
+                setData(data)
+            })
+    }, [id])
 
     const set = (value) => {
-        setData(value, (currentData) => {
-            console.log(currentData)
+        setData(value)
+    }
+
+    const applyChanges = () => {
+        axios.put(`/events/${id}`, {
+            ...data,
+            data: JSON.stringify(data.data || [])
+        }).then(() => {
+            axios.get(`/events/${id}`).then((res) => {
+                const data = {...res.data.event, data: JSON.parse(res?.data.event?.data || "[]")}
+                setData(data)
+            })
         })
     }
 
-    return !item ? <Redirect to={"/admin"}/> : (
+    return !data ? <Redirect to={"/admin"}/> : (
         <div>
-            <DynamicEditing data={data} setData={set}/>
+            <DynamicEditing data={data} setData={set} onSave={applyChanges}/>
             <Preview data={data}/>
-            <LogArea text={text} changeText={changeText} handleJson={handleJson}/>
         </div>
     )
 }
