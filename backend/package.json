@@ -5,8 +5,22 @@
   "repository": "https://github.com/418-team/surgu-calendar",
   "author": "418team",
   "license": "MIT",
+  "scripts": {
+    "start": "NODE_ENV=dev nodemon -L -e js,yaml index.js",
+    "prod": "node index.js",
+    "migrate": "node_modules/.bin/node-pg-migrate"
+  },
   "private": true,
   "dependencies": {
-    "fastify": "^3.24.0"
+    "fastify": "^3.24.0",
+    "fastify-cors": "^6.0.2",
+    "fastify-formbody": "^5.2.0",
+    "fastify-swagger": "^4.12.6",
+    "jsonwebtoken": "^8.5.1",
+    "node-pg-migrate": "^6.0.0",
+    "nodemon": "^2.0.15",
+    "pg": "^8.7.1",
+    "pg-format": "^1.0.4",
+    "pino": "^7.3.0"
   }
 }

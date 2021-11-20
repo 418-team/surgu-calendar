@@ -1,0 +1,46 @@
+version: "3.7"
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: local.Dockerfile
+    environment:
+      DATABASE_URL: postgres://root:${POSTGRES_PASSWORD}@postgres/surent
+    env_file:
+      - .env
+    container_name: backend
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    ports:
+      - "14400:80"
+    volumes:
+      - ./backend:/app:rw
+    networks:
+      - internal
+
+  postgres:
+    image: postgres:12.2
+    container_name: postgres
+    restart: always
+    tty: true
+    ports:
+      - "127.0.0.1:14402:5432"
+    environment:
+      command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+      POSTGRES_DB: surent
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d surent -U root" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data:rw
+    networks:
+      - internal
+
+networks:
+  internal:

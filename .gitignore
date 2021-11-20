@@ -61,6 +61,7 @@ buck-out/
 # CocoaPods
 /ios/Pods/
 
+.env
 # Expo
 mobile/.expo
 mobile/.expo-shared
