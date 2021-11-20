@@ -59,6 +59,7 @@ const Event = ({match}) => {
             <Preview data={data}/>
             {data?.start_date &&
                 <button
+                    style={{ padding: "10px", background: "black", color: "white", border: "none", marginTop: "10px" }}
                     onClick={() =>
                         makeIcsFile({start: data?.start_date, end: data.end_date}, data.title, data.description)}
                 >

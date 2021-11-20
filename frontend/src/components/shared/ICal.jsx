@@ -17,26 +17,34 @@ function convertDate(date) {
     event = event.join("");
     return event;
 }
+
+const getText = (text) => {
+    return unescape(encodeURI(text))
+}
+
 export function makeIcsFile(date, summary, description) {
     const test =
         "BEGIN:VCALENDAR\n" +
         "CALSCALE:GREGORIAN\n" +
         "METHOD:PUBLISH\n" +
-        "PRODID:-//Test Cal//EN\n" +
+        "PRODID:-//418 Team//RU\n" +
         "VERSION:2.0\n" +
         "BEGIN:VEVENT\n" +
-        "UID:test-1\n" +
+        "UID:" +
+        summary.replaceAll(" ", "-") +
+        "\n" +
         "DTSTART;VALUE=DATE:" +
         convertDate(date.start) +
         "\n" +
         "DTEND;VALUE=DATE:" +
         convertDate(date.end) +
         "\n" +
-        "SUMMARY:" +
-        summary +
+        "SUMMARY;" +"\n" +
+        "LANGUAGE=ru-RU:"+
+        getText(summary) +
         "\n" +
         "DESCRIPTION:" +
-        description +
+        getText(description) +
         "\n" +
         "END:VEVENT\n" +
         "END:VCALENDAR";

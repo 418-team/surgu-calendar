@@ -19,6 +19,10 @@ function App() {
         'Authorization': 'Bearer ' + localStorage.access_token
     };
     moment.locale("ru", [ruLocale])
+
+    const storage = window.localStorage;
+    const token = storage.getItem("token")
+
   return (
     <div className="App">
       <header className="App-header">
@@ -28,9 +32,8 @@ function App() {
                 <Header/>
                 <div style={{ padding: "40px 100px 0px" }}>
                 <Switch>
-                    <Route exact path="/">
-                        <Home />
-                    </Route>
+                    if ()
+                    <Route exact path="/"><Home/></Route>
 
                     <Route path={"/admin/tags"} component={Tags}/>
 
