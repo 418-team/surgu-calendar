@@ -1,0 +1,12 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/418-team/surgu-calendar",
+  "author": "418team",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "fastify": "^3.24.0"
+  }
+}
