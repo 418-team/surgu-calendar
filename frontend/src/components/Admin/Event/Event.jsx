@@ -1,22 +1,12 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import Preview from './Preview/Preview';
-import { DynamicEditing } from './Preview/DynamicEditing';
+import Preview from '../Preview/Preview';
+import { DynamicEditing } from '../Preview/DynamicEditing';
 import  {Redirect} from 'react-router-dom';
-import "./Admin.css"
+import "../Admin.css"
 import axios from 'axios';
+import {makeIcsFile} from "../../shared/ICal"
 
-function debounce(func, wait, immediate) {
-    let timeout;
-    return function() {
-        const context = this, args = arguments;
-        clearTimeout(timeout);
-        timeout = setTimeout(function() {
-            timeout = null;
-            if (!immediate) func.apply(context, args);
-        }, wait);
-        if (immediate && !timeout) func.apply(context, args);
-    };
-}
+
 
 const useStateCallback = (initialState) => {
     const [state, setState] = useState(initialState);
@@ -41,10 +31,10 @@ const Event = ({match}) => {
     const [data, setData] = useStateCallback({})
 
     useEffect(() => {
-            axios.get(`/events/${id}`).then((res) => {
-                const data = {...res.data.event, data: JSON.parse(res.data.event?.data || "[]")}
-                setData(data)
-            })
+        axios.get(`/events/${id}`).then((res) => {
+            const data = {...res.data.event, data: JSON.parse(res.data.event?.data || "[]")}
+            setData(data)
+        })
     }, [id])
 
     const set = (value) => {
@@ -67,6 +57,14 @@ const Event = ({match}) => {
         <div>
             <DynamicEditing data={data} setData={set} onSave={applyChanges}/>
             <Preview data={data}/>
+            {data?.start_date &&
+                <button
+                    onClick={() =>
+                        makeIcsFile({start: data?.start_date, end: data.end_date}, data.title, data.description)}
+                >
+                    Загрузить в календарь
+                </button>
+            }
         </div>
     )
 }

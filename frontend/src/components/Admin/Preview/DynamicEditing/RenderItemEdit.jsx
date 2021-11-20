@@ -1,7 +1,6 @@
 import TextareaAutosize from 'react-textarea-autosize';
 
 const RenderItemEdit = ({item, onEdit}) => {
-    console.log(item)
     if (item.type === "header"){
         return(
             <div>

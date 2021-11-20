@@ -8,6 +8,8 @@ const Header = () => {
         <div className="header">
             <Link to="/">Главная</Link>
             <Link to="/admin">Административная панель</Link>
+            <Link to="/admin/group">Группы</Link>
+            <Link to="/admin/tags">Теги</Link>
         </div>
     </div>
 }

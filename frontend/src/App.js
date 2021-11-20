@@ -7,7 +7,7 @@ import ruLocale from "moment/locale/ru"
 
 import Home from './components/Home';
 import Header from "./components/Header/index"
-import { Event, Admin } from './components/Admin';
+import { Event, Admin, NewEvent, NewGroup, Groups, Group, Tags, Tag } from './components/Admin';
 import moment from 'moment';
 import axios from 'axios';
 
@@ -26,10 +26,21 @@ function App() {
         <Router>
             <div>
                 <Header/>
+                <div style={{ padding: "40px 100px 0px" }}>
                 <Switch>
                     <Route exact path="/">
                         <Home />
                     </Route>
+
+                    <Route path={"/admin/tags"} component={Tags}/>
+
+                    <Route path="/admin/group/:id" component={Group}/>
+
+                    <Route path="/admin/group" component={Groups}/>
+
+                    <Route path="/admin/addgroup" component={NewGroup}/>
+
+                    <Route path="/admin/addevent" component={NewEvent}/>
 
                     <Route path="/admin/:id" component={Event}/>
 
@@ -37,6 +48,7 @@ function App() {
                         <Admin />
                     </Route>
                 </Switch>
+                </div>
             </div>
         </Router>
     </div>

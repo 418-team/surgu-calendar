@@ -2,6 +2,10 @@
     position: relative;
 }
 
+h1, h2, h3, h4, h5 {
+    margin: 0;
+}
+
 .edit-table div + div {
     margin-top: 20px;
 }
@@ -70,4 +74,27 @@
     color: rgba(0, 0, 0, 0.87);
     text-align: left;
     line-height: 20px;
+}
+
+input {
+    padding: 10px
+}
+.createNewEvent {
+    margin-top: 100px;
+}
+
+.createNewEvent input[type="text"] {
+    font-size: 16px;
+}
+
+.createNewEvent > input + input {
+    margin-top: 10px;
+}
+
+.createNewEvent > input + .react-datetime-picker {
+    margin-top: 10px;
+}
+
+.createNewEvent > .react-datetime-picker + .react-datetime-picker {
+    margin-top: 10px;
 }

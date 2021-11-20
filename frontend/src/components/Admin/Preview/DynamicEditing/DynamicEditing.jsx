@@ -55,9 +55,11 @@ const DynamicEditing = ({data, setData, onSave}) => {
         })
     }
 
+    const list = ["header", "label", "text", "image"]
+
     return (
         <>
-            <div style={{ display: "flex", flexDirection: "column", padding: "10px 100px" }}>
+            <div style={{ display: "flex", flexDirection: "column" }}>
                 <Header name={"Редактирование"} type={"header"}  style={{ fontSize: "28px" }}/>
                 <div className={"edit-table"}>
                     <input type="text"
@@ -76,7 +78,7 @@ const DynamicEditing = ({data, setData, onSave}) => {
                     <RenderItemEdit item={i} onEdit={onEdit}/>
                  ))}
                 </div>
-                <AddItem addItem={addItem}/>
+                <AddItem addItem={addItem} label={"Добавить новое поле"} items={list}/>
                 <div style={{textAlign: "right", marginTop: "20px"}}>
                     <button style={{background: "black", color: "white", padding: "10px", border: "none"}} onClick={onSave}>Сохранить</button>
                 </div>

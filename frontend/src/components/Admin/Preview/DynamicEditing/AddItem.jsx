@@ -16,7 +16,7 @@ const useClickOutside = (ref, callback) => {
     }, [ref]);
 }
 
-const AddItem = ({addItem}) => {
+const AddItem = ({addItem, items, type, label, field}) => {
     const list = ["header", "label", "text", "image"]
     const wrapperRef = useRef(null);
     useClickOutside(wrapperRef, () => {
@@ -29,14 +29,19 @@ const AddItem = ({addItem}) => {
             onClick={() => setOpen((s) => !s)}
             aria-hidden="true"
         >
-            <span className="label">Создать новое поле</span>
+            <span className="label">{label}</span>
         </div>
             <div className={open ? "items" : "items hide"}>
-                {list.map((element) => (
+                {items.map((element) => (
                     <SelectItem
-                        key={element}
+                        key={JSON.stringify(element)}
+                        field={field}
+                        type={type}
                         item={element}
-                        handleChecked={() => addItem(element)}
+                        handleChecked={() => {
+                            addItem(element)
+                            setOpen(false)
+                        }}
                     />
                 ))}
             </div>

@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react';
 import Divider from '../shared/Divider';
 import moment from 'moment';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import Header from './Preview/Header';
 import axios from "axios";
 
@@ -13,18 +13,24 @@ const Admin = () => {
         })
     }, [])
 
+    const history = useHistory()
 
     const [search, setSearch] = useState("")
 
     const filteredData = data.filter((i) => i.title.toLowerCase().indexOf(search.toLowerCase()) !== -1)
 
     return (
-        <div style={{ padding: "40px 100px 0px"}}>
-            <div style={{ marginBottom: "10px" }}>
-                <input type="text" placeholder={"Введите название"}
+        <div>
+            <div style={{ marginBottom: "10px", display: "flex" }}>
+                <input type="text" placeholder={"Поиск по названию"}
                        value={search}
                        style={{width: "calc(100% - 24px)", padding: "10px"}}
                        onChange={(e) => setSearch(e.target.value)}/>
+                <div>
+                    <button style={{background: "black", color: "white", padding: "12px 10px", border: "none", width: "200px"}} onClick={() => history.push("/admin/addevent")}>
+                        Создать новое мероприятие
+                    </button>
+                </div>
             </div>
             {filteredData.map((item) => (
                 <div style={{border: "1px solid black", padding: "20px", marginBottom: "10px" }} key={item.id}>
