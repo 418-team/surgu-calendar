@@ -1,9 +1,9 @@
-import initialData from "../Home/mockFileSolo.json"
+import initialData from "../Home/mockFile.json"
 import { useState, useRef, useEffect, useCallback } from 'react';
 import LogArea from './LogArea';
 import Preview from './Preview/Preview';
-import Header from "./Preview/Header"
 import { DynamicEditing } from './Preview/DynamicEditing';
+import  {Redirect} from 'react-router-dom';
 import "./Admin.css"
 
 const useStateCallback = (initialState) => {
@@ -31,9 +31,14 @@ function safeJsonParse(str) {
     }
 }
 
-const Event = () => {
-    const [data, setData] = useStateCallback(initialData)
+const Event = ({match}) => {
+    const id = match.params.id
+    console.log(id)
+    console.log(initialData)
+    const item = initialData?.find((i) => i.id === parseInt(id))
+    const [data, setData] = useStateCallback(item || null)
     const [text, setText] = useState(JSON.stringify(data, null, 2))
+
 
     const changeText = (value) => setText(value)
 
@@ -52,7 +57,7 @@ const Event = () => {
         })
     }
 
-    return (
+    return !item ? <Redirect to={"/admin"}/> : (
         <div>
             <DynamicEditing data={data} setData={set}/>
             <Preview data={data}/>

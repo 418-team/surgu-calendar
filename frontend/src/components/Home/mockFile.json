@@ -1,5 +1,6 @@
 [
   {
+    "id": 1,
     "name": "SurCTF",
     "start_date": "2021-11-20T09:23:01.323Z",
     "end_date": "2021-11-20T09:23:01.323Z",
@@ -17,26 +18,82 @@
     "participants": [],
     "template": [
       {
+        "id": "1",
         "type": "header",
         "value": "SurCTF Впервые в Сургуте"
       },
       {
+        "id": "2",
         "type": "label",
         "value": "Впервые в Сургуте пройдет огромный event!!!"
       },
       {
+        "id": "3",
         "type": "image",
         "value": "link s3"
       },
       {
+        "id": "4",
         "type": "text",
         "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vestibulum eget orci sit amet rhoncus. Vivamus vel neque eget quam rutrum varius sit amet vel libero. Mauris mattis semper ante, sit amet dignissim dolor viverra quis. Suspendisse consectetur congue rhoncus. Donec et nulla lectus. Mauris quam magna, pharetra sed turpis in, imperdiet viverra tortor. Sed id dolor felis. Suspendisse dui dui, mollis nec neque et, pellentesque sagittis felis. Nulla bibendum augue eu mi sodales faucibus a in elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur a dolor in ex porta rhoncus. Integer condimentum urna et tortor vestibulum elementum eget at tortor."
       },
       {
+        "id": "5",
         "type": "label",
         "value": "Призы"
       },
       {
+        "id": "6",
+        "type": "text",
+        "value" : "Mauris in fermentum magna. Duis pulvinar justo ac ultricies cursus. Ut eleifend mauris mi, ullamcorper laoreet tellus rhoncus eu. Suspendisse eu hendrerit lacus. Sed dignissim cursus turpis nec semper. Vivamus laoreet, ante eu finibus fermentum, ipsum diam dignissim felis, vitae aliquet mauris orci ut purus. Nullam vel tincidunt nibh."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Hackathon",
+    "start_date": "2021-11-20T09:23:01.323Z",
+    "end_date": "2021-11-20T09:23:01.323Z",
+    "banner_img": "link s3",
+    "tags": [
+      {
+        "id": 1,
+        "title": "CTF"
+      },
+      {
+        "id": 2,
+        "title": "IT"
+      }
+    ],
+    "participants": [],
+    "template": [
+      {
+        "id": "1",
+        "type": "header",
+        "value": "SurCTF Впервые в Сургуте"
+      },
+      {
+        "id": "2",
+        "type": "label",
+        "value": "Впервые в Сургуте пройдет огромный event!!!"
+      },
+      {
+        "id": "3",
+        "type": "image",
+        "value": "link s3"
+      },
+      {
+        "id": "4",
+        "type": "text",
+        "value": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur vestibulum eget orci sit amet rhoncus. Vivamus vel neque eget quam rutrum varius sit amet vel libero. Mauris mattis semper ante, sit amet dignissim dolor viverra quis. Suspendisse consectetur congue rhoncus. Donec et nulla lectus. Mauris quam magna, pharetra sed turpis in, imperdiet viverra tortor. Sed id dolor felis. Suspendisse dui dui, mollis nec neque et, pellentesque sagittis felis. Nulla bibendum augue eu mi sodales faucibus a in elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Curabitur a dolor in ex porta rhoncus. Integer condimentum urna et tortor vestibulum elementum eget at tortor."
+      },
+      {
+        "id": "5",
+        "type": "label",
+        "value": "Призы"
+      },
+      {
+        "id": "6",
         "type": "text",
         "value" : "Mauris in fermentum magna. Duis pulvinar justo ac ultricies cursus. Ut eleifend mauris mi, ullamcorper laoreet tellus rhoncus eu. Suspendisse eu hendrerit lacus. Sed dignissim cursus turpis nec semper. Vivamus laoreet, ante eu finibus fermentum, ipsum diam dignissim felis, vitae aliquet mauris orci ut purus. Nullam vel tincidunt nibh."
       }
