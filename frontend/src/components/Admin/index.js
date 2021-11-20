@@ -1,3 +1,3 @@
-import Admin from "./Admin"
+import Event from "./Event"
 
-export { Admin }
+export { Event }

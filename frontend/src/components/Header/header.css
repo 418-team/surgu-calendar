@@ -1,0 +1,39 @@
+.header {
+    display: flex;
+    justify-content: center;
+    background-color: black;
+    border-radius: 10px;
+}
+
+.header-body {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.header > a {
+    padding: 10px;
+    background-color: black;
+}
+
+.header > a:hover {
+    background-color: #6b6b6b;
+    border-radius: 10px;
+}
+
+.header > a:last-child {
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.header > a:first-child {
+    border-bottom-left-radius: 10px;
+    border-top-left-radius: 10px;
+}
+
+
+
+a {
+    color: white;
+    text-decoration: none;
+}
