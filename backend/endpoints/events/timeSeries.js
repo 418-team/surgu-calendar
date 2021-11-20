@@ -43,7 +43,59 @@ const params = {
                 date: {type: 'string'}
             }
         },
-        response: {}
+        response: {
+            200: {
+                type: 'object',
+                properties: {
+                    statusCode: {type: 'integer'},
+                    data: {
+                        type: 'object',
+                        additionalProperties: {
+                            type: 'array',
+                            additionalProperties: {
+                                type: 'object',
+                                properties: {
+                                    id: {type: 'integer'},
+                                    title: {type: 'string'},
+                                    start_date: {type: 'string'},
+                                    end_date: {type: 'string'},
+                                    tags: {
+                                        type: 'array',
+                                        additionalProperties: {
+                                            type: 'object',
+                                            properties: {
+                                                id: {type: 'integer'},
+                                                title: {type: 'string'}
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                example: {
+                    'statusCode': 200,
+                    'data': {
+                        '2021-11-01': [],
+                        '2021-11-02': [
+                            {
+                                'id': 5,
+                                'title': 'test',
+                                'start_date': '2021-11-02T19:00:00+00:00',
+                                'end_date': '2021-11-25T19:00:00+00:00',
+                                'tags': [
+                                    {
+                                        'id': 3,
+                                        'title': 'Задание'
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }
+        }
     }
 };
 
