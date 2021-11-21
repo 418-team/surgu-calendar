@@ -1,7 +1,6 @@
 import React from "react";
-import {View, Text, TouchableOpacity, StyleSheet} from "react-native";
+import {StyleSheet} from "react-native";
 import {Calendar, LocaleConfig} from "react-native-calendars";
-import moment from "moment";
 
 LocaleConfig.locales['ru'] = {
     monthNames: ['Январь','Февраль','Март','Апрель','Май','Июнь','Июль','Август','Сентябрь','Октябрь','Ноябрь','Декабрь'],

@@ -5,7 +5,7 @@ import moment from "moment";
 
 import { DataParser } from "../../components/DataParser";
 import {DataCalendar} from "../../components/DataCalendar";
-import {getEventByTime, getEvents} from "../../services/api";
+import {getEventByTime} from "../../services/api";
 import {getDataFromStorage} from "../../services/storage";
 
 export function HomeScreen({navigation}) {

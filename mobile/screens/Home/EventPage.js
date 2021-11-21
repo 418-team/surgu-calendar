@@ -1,4 +1,4 @@
-import React, {useCallback, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
     View,
     Text,
@@ -6,10 +6,6 @@ import {
     Image,
     ScrollView,
     ActivityIndicator,
-    Pressable,
-    Linking,
-    Alert,
-    Button
 } from "react-native";
 import {SafeAreaView} from "react-native-safe-area-context";
 import moment from "moment";
