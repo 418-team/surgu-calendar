@@ -17,6 +17,7 @@ services:
       - "14400:80"
     volumes:
       - ./backend:/app:rw
+      - ./googlekey.json:/googlekey.json
     networks:
       - internal
 

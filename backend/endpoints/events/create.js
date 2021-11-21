@@ -1,5 +1,6 @@
 const format = require('pg-format');
 const sqlArray = require('../../utils/sqlArray');
+const {syncGoogleCalendar} = require('../../utils/google');
 
 const SQL = `
     INSERT INTO events (title, description, start_date, end_date, picture_url, data)
@@ -16,6 +17,20 @@ async function handler(req, res) {
 
     await sqlArray(req, 'events_groups', 'event_id', 'group_id', result.id, b.groups);
     await sqlArray(req, 'events_tags', 'event_id', 'tag_id', result.id, b.tags);
+
+    const usersToUpdate = (await req.pg.query(`
+        SELECT u.id, u.google_calendar_id
+        FROM events_groups eg
+                 JOIN groups_users gu on eg.group_id = gu.group_id
+                 JOIN users u on u.id = gu.user_id
+        WHERE eg.event_id = $1
+          AND u.google_calendar_id IS NOT NULL
+        GROUP BY u.id
+    `, [result.id])).rows;
+
+    usersToUpdate.map(async (user) => {
+        await syncGoogleCalendar(req, user.google_calendar_id, {name: 'user_full', userId: user.id});
+    });
 
     console.log('result', result);
 

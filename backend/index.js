@@ -5,6 +5,7 @@ setupSwagger(fastify);
 
 const pgConnector = require('./utils/pgConnector');
 const {AuthCheck} = require('./utils/security');
+const {syncGoogleCalendar} = require('./utils/google');
 pgConnector.initDB();
 
 fastify.register(require('fastify-cors'), {
@@ -37,11 +38,13 @@ fastify.get('/', function (request, reply) {
 
 fastify.addHook('preHandler', AuthCheck);
 fastify.register(require('./endpoints/oauth'));
-fastify.register(require('./endpoints/account'));
+// fastify.register(require('./endpoints/account'));
 fastify.register(require('./endpoints/users'));
 fastify.register(require('./endpoints/events'));
 fastify.register(require('./endpoints/tags'));
 fastify.register(require('./endpoints/groups'));
+
+// syncGoogleCalendar('9j7f353ron36pmjrbvovmqgans@group.calendar.google.com', 1);
 
 const start = async () => {
     try {
