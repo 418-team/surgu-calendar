@@ -52,10 +52,10 @@ jobs:
       - name: Setup SSH
         run: |
           mkdir ~/.ssh/
-          ssh-keyscan -t rsa ${{ secrets.REMOTE_HOST }} > ~/.ssh/known_hosts
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/docker
+          ssh-keyscan -t rsa ${{ secrets.PRODUCTION_HOST }} > ~/.ssh/known_hosts
+          echo "${{ secrets.PRODUCTION_SSH_PRIVATE_KEY }}" > ~/.ssh/docker
           chmod 600 ~/.ssh/docker
-          echo "${{ secrets.SSH_CONFIG }}" > ~/.ssh/config
+          echo "${{ secrets.PRODUCTION_SSH_CONFIG }}" > ~/.ssh/config
 
       - name: Docker Login
         env:
@@ -65,4 +65,4 @@ jobs:
       - name: Docker update service
         run: docker service update --with-registry-auth --image cr.yandex/crpt0p11mpru2thprleg/backend:${{ steps.version.outputs.TAG_NAME }} surgu_backend
         env:
-          DOCKER_HOST: "ssh://${{ secrets.REMOTE_HOST }}"
+          DOCKER_HOST: "ssh://${{ secrets.PRODUCTION_HOST }}"
