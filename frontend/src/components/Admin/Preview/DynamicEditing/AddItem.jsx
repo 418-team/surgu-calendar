@@ -17,7 +17,6 @@ const useClickOutside = (ref, callback) => {
 }
 
 const AddItem = ({addItem, items, type, label, field}) => {
-    const list = ["header", "label", "text", "image"]
     const wrapperRef = useRef(null);
     useClickOutside(wrapperRef, () => {
         setOpen(false);
