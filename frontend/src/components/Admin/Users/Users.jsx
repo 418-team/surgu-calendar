@@ -3,11 +3,11 @@ import axios from 'axios';
 import { Link, useHistory, } from 'react-router-dom';
 import Header from '../Preview/Header';
 
-const Groups = () => {
+const Users = () => {
     const [data, setData] = useState([])
 
     useEffect(() => {
-        axios.get("/groups/list").then((res) => {
+        axios.get("/users/list").then((res) => {
             setData(res.data.rows)
         })
     }, [])
@@ -16,7 +16,7 @@ const Groups = () => {
 
     const [search, setSearch] = useState("")
 
-    const filteredData = data.filter((i) => i.title.toLowerCase().indexOf(search.toLowerCase()) !== -1)
+    const filteredData = data.filter((i) => `${i.first_name} ${i.last_name}`.toLowerCase().indexOf(search.toLowerCase()) !== -1)
 
     return (
         <div>
@@ -25,16 +25,14 @@ const Groups = () => {
                        value={search}
                        onChange={(e) => setSearch(e.target.value)}/>
                 <div>
-                    <button onClick={() => history.push("/admin/addgroup")}>
-                        Создать новую группу
+                    <button onClick={() => history.push("/admin/adduser")}>
+                        Создать пользователя
                     </button>
                 </div>
             </div>
             {filteredData.map((item) => (
                 <div style={{border: "1px solid black", padding: "20px", marginBottom: "10px" }} key={item.id}>
-                    <Link to={`/admin/group/${item.id}`} style={{ color: "black" }}>
-                        <Header name={item.title} type={"header"}/>
-                    </Link>
+                        <Header name={`${item.first_name} ${item.last_name}`} type={"header"}/>
                     {item.description}
                 </div>
             ))}
@@ -42,4 +40,4 @@ const Groups = () => {
     )
 }
 
-export default Groups
+export default Users

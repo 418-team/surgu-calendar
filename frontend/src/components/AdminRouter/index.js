@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import LeftMenu from '../LeftMenu';
 import Home from '../Home';
-import { Admin, Event, Group, Groups, NewEvent, NewGroup, Tags, NewTag } from '../Admin';
+import { Admin, Event, Group, Groups, NewEvent, NewGroup, Tags, NewTag, Users, NewUser } from '../Admin';
 
 
 function AdminRouter() {
@@ -25,6 +25,10 @@ function AdminRouter() {
                         <Route path="/admin/group" component={Groups}/>
 
                         <Route path="/admin/addgroup" component={NewGroup}/>
+
+                        <Route path={"/admin/users"} component={Users}/>
+
+                        <Route path={"/admin/adduser"} component={NewUser}/>
 
                         <Route path={'/admin/addteg'} component={NewTag}/>
 

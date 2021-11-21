@@ -97,11 +97,11 @@ const DynamicEditing = ({data, setData, groups, tags, onSave}) => {
             <div style={{ display: "flex", flexDirection: "column" }}>
                 <Header name={"Редактирование"} type={"header"}  style={{ fontSize: "28px" }}/>
                 <div className={"edit-table"}>
-                    <RenderItemEdit item={{type: 'header', value: data.title}} onEdit={onEdit} />
-                    <RenderItemEdit item={{type: 'label', value: data.description}} onEdit={onEdit} />
-                {data.data?.map((i) => (
-                    <RenderItemEdit item={i} onEdit={onEdit}/>
-                 ))}
+                    <input value={data.title} className={"field"} style={{ marginBottom: "20px" }} onChange={(e) => changeEventName(e.target.value)} />
+                    <input value={data.description} className={"field"} style={{ marginBottom: "20px" }} onChange={(e) => changeEventDescription(e.target.value)} />
+                    {data.data?.map((i) => (
+                        <RenderItemEdit item={i} onEdit={onEdit}/>
+                     ))}
                 </div>
                 <AddItem addItem={addItem} label={"Добавить новое поле"} items={list}/>
                 <div style={{ marginTop: "20px", display: "flex" }}>
