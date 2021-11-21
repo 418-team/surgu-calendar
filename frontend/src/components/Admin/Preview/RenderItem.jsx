@@ -8,8 +8,7 @@ const RenderItem = ({item}) => {
         return <Header name={item.value} type='label'/>
     } else if (item.type === "text") {
         return <TextField value={item.value}/>
-    }
-    else {
+    } else {
         return ""
     }
 }

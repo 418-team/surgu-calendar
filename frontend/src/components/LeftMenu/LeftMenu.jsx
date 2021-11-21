@@ -3,19 +3,19 @@ import {
 } from "react-router-dom";
 import {IoHomeSharp, IoPerson, IoPeople, IoPricetagSharp, IoExit} from "react-icons/io5";
 
-import "./header.css"
+import "./left_menu.css"
 
 const iconSize = 20
 
-const Header = () => {
+const LeftMenu = () => {
     const logout = () => {
         localStorage.clear()
         document.location.reload()
 
     }
     return (
-        <div className="header">
-            <div className="header_logo">
+        <div className="left_menu">
+            <div className="left_menu_logo">
                 <p>SUR</p>
                 <p>ENT</p>
             </div>
@@ -28,4 +28,4 @@ const Header = () => {
     )
 }
 
-export default Header
+export default LeftMenu

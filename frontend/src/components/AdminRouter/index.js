@@ -4,7 +4,7 @@ import {
     Switch,
     Route
 } from 'react-router-dom';
-import Header from '../Header';
+import LeftMenu from '../LeftMenu';
 import Home from '../Home';
 import { Admin, Event, Group, Groups, NewEvent, NewGroup, Tags, NewTag } from '../Admin';
 
@@ -13,7 +13,7 @@ function AdminRouter() {
     return (
         <Router>
             <div>
-                <Header/>
+                <LeftMenu />
                 <div style={{padding: '40px 100px 0px', backgroundColor: "rgb(238, 240, 242)"}}>
                     <Switch>
                         <Route exact path="/"><Home/></Route>

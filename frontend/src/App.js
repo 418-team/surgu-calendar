@@ -4,15 +4,15 @@ import {
     Route
 } from 'react-router-dom';
 import ruLocale from 'moment/locale/ru';
-import "./App.css"
-
 import moment from 'moment';
 import axios from 'axios';
+
+import "./App.css"
+
 import PrivateRoute from './components/PrivateRoute';
 import AdminRouter from './components/AdminRouter';
 import Auth from './components/Auth';
 import { refresh } from './utils/api';
-
 
 function App() {
     axios.defaults.baseURL = window.location.host.includes('418.one') ? 'https://api.surent.418.one' : 'http://94.41.65.26';
