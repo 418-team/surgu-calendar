@@ -1,0 +1,37 @@
+name: Production - Frontend
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+    paths:
+      - backend/**
+      - .github/workflows/frontend.yml
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Retrieve version
+        id: version
+        run: echo "::set-output name=TAG_NAME::ci-${{ github.run_number }}"
+
+      - name: Docker Login
+        env:
+          YC_AUTH_KEY: ${{ secrets.YC_AUTH_KEY }}
+        run: echo "$YC_AUTH_KEY" | docker login --username json_key --password-stdin cr.yandex
+
+      - name: Build Docker image
+        run: |
+          docker build -f ./frontend/prod.Dockerfile \
+          --build-arg NODE_ENV=production \
+          --build-arg VERSION=${{ steps.version.outputs.TAG_NAME }} \
+          --tag cr.yandex/crpt0p11mpru2thprleg/frontend:${{ steps.version.outputs.TAG_NAME }} \
+          --tag cr.yandex/crpt0p11mpru2thprleg/frontend:latest ./frontend
+
+      - name: Push Docker image
+        run: |
+          docker push cr.yandex/crpt0p11mpru2thprleg/frontend:${{ steps.version.outputs.TAG_NAME }}
+          docker push cr.yandex/crpt0p11mpru2thprleg/frontend:latest
