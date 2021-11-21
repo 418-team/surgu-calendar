@@ -1,14 +1,12 @@
 import React from 'react';
-import {FontAwesome} from "@expo/vector-icons";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import {SafeAreaProvider} from "react-native-safe-area-context";
 import moment from "moment";
 import ruLocale from 'moment/locale/ru';
 
 import Home from "./navigators/Home";
 import Login from "./navigators/Login";
-import {SafeAreaProvider} from "react-native-safe-area-context/src/SafeAreaContext";
 
 const Stack = createNativeStackNavigator();
 
