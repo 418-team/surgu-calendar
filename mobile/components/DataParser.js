@@ -16,13 +16,20 @@ export function DataParser({data}) {
                         <View>
                             <Text style={styles.eventTitle}>{data[event]?.title}</Text>
                             <Text style={styles.eventStartDate}>{moment(data[event]?.start_date).calendar()}</Text>
+                            <View>
+                                {data[event]?.tags.map((tag) =>
+                                    <Text style={styles.eventTag}>{tag.title}</Text>
+                                )}
+                            </View>
                         </View>
-                        <Text style={styles.eventTimeLeft}>
-                            {moment(data[event]?.start_date).isAfter(moment()) ?
-                                'Начало ' +  moment(data[event]?.start_date).fromNow() :
-                                'Конец ' +  moment(data[event]?.end_date).fromNow()
-                            }
-                        </Text>
+                        <View>
+                            <Text style={styles.eventTimeLeft}>
+                                {moment(data[event]?.start_date).isAfter(moment()) ?
+                                    'Начало ' +  moment(data[event]?.start_date).fromNow() :
+                                    'Конец ' +  moment(data[event]?.end_date).fromNow()
+                                }
+                            </Text>
+                        </View>
                     </View>
                 </TouchableOpacity>
             ) : <Text style={styles.noEventsText}>Событий нет</Text>}
@@ -62,6 +69,15 @@ const styles = StyleSheet.create({
     eventTimeLeft: {
         fontSize: 15,
         fontWeight: 'bold'
+    },
+    eventTag: {
+        color: '#ffffff',
+        backgroundColor: '#000000',
+        borderRadius: 20,
+        textAlign: 'center',
+        maxWidth: 110,
+        alignItems: 'center',
+        marginTop: 5
     },
     noEventsText: {
         fontSize: 24,
