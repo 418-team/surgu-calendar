@@ -2,9 +2,11 @@
     position: relative;
 }
 
-h1, h2, h3, h4, h5 {
-    margin: 0;
+* {
+    color: rgba(0,0,0, 0.8)
 }
+
+
 
 .edit-table div + div {
     margin-top: 20px;
@@ -16,12 +18,14 @@ p {
 
 .search {
     margin-bottom: 10px;
-    display: flex
+    display: flex;
+    box-shadow: 3px 3px 8px 0 rgba(0,0, 0, 0.1);
 }
 
 .search input {
     width: calc(100% - 24px);
     padding: 10px;
+    border: transparent;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px
 }
@@ -38,7 +42,7 @@ p {
 
 
 .event-card {
-    background-color: rgba(100, 100, 100, 0.05);
+    background-color: white;
     padding: 20px;
     margin-bottom: 10px;
     border-radius: 12px;

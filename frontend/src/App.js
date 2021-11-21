@@ -4,6 +4,7 @@ import {
     Route
 } from 'react-router-dom';
 import ruLocale from 'moment/locale/ru';
+import "./App.css"
 
 import moment from 'moment';
 import axios from 'axios';

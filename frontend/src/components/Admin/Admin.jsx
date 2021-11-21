@@ -37,15 +37,17 @@ const Admin = () => {
                         <Header name={item.title} type={"header"}/>
                     </Link>
                     {item.description}
-                    <div style={{ display: "flex" }}>
-                    {item?.tags?.map((tag) => (
-                        <div style={{ background: "black", marginTop:"5px", color: "white", marginRight: "10px", fontSize: "12px", padding: "3px 6px", borderRadius: "5px" }}>
-                            {tag.title}
-                        </div>
-                    ))}
+                    <div style={{ display: "flex", marginTop: "15px" }}>
                     </div>
                     <Divider/>
-                    <p style={{ fontSize: "12px" }}>{moment(item.start_date).format("L в H:mm")} - {moment(item.end_date).format("L в H:mm, dddd")}</p>
+                    <p style={{ fontSize: "12px" }}>
+                        {moment(item.start_date).format("L в H:mm")} - {moment(item.end_date).format("L в H:mm, dddd")}
+                        {item?.tags?.map((tag) => (
+                            <span style={{ background: "#EEF1F9", marginTop:"5px", color: "black", marginLeft: "10px", fontSize: "12px", padding: "3px 6px", borderRadius: "5px" }}>
+                                {tag.title}
+                            </span>
+                        ))}
+                    </p>
                 </div>
             ))}
         </div>
