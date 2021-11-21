@@ -29,7 +29,7 @@ jobs:
           --build-arg NODE_ENV=production \
           --build-arg VERSION=${{ steps.version.outputs.TAG_NAME }} \
           --tag cr.yandex/crpt0p11mpru2thprleg/backend:${{ steps.version.outputs.TAG_NAME }} \
-          --tag cr.yandex/crpt0p11mpru2thprleg/backend:latest backend
+          --tag cr.yandex/crpt0p11mpru2thprleg/backend:latest ./backend
 
       - name: Push Docker image
         run: |
