@@ -15,6 +15,10 @@ const Header = () => {
     }
     return (
         <div className="header">
+            <div className="header_logo">
+                <p>SUR</p>
+                <p>ENT</p>
+            </div>
             <Link to="/"><IoHome fontSize={iconSize} color={"black"} /></Link>
             <Link to="/admin"><IoPerson fontSize={iconSize} color={"black"} /></Link>
             <Link to="/admin/group"><IoPeople fontSize={iconSize} color={"black"} /></Link>
