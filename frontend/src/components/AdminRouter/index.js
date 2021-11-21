@@ -17,7 +17,7 @@ function AdminRouter() {
         <Router>
             <div>
                 <Header/>
-                <div style={{padding: '40px 100px 0px'}}>
+                <div style={{padding: '40px 100px 0px', backgroundColor: "rbg(238, 240, 242)"}}>
                     <Switch>
                         <Route exact path="/"><Home/></Route>
 

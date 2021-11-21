@@ -21,19 +21,18 @@ const Admin = () => {
 
     return (
         <div>
-            <div style={{ marginBottom: "10px", display: "flex" }}>
+            <div className={"search"}>
                 <input type="text" placeholder={"Поиск по названию"}
                        value={search}
-                       style={{width: "calc(100% - 24px)", padding: "10px"}}
                        onChange={(e) => setSearch(e.target.value)}/>
                 <div>
-                    <button style={{background: "black", color: "white", padding: "12px 10px", border: "none", width: "200px"}} onClick={() => history.push("/admin/addevent")}>
+                    <button onClick={() => history.push("/admin/addevent")}>
                         Создать новое мероприятие
                     </button>
                 </div>
             </div>
             {filteredData.map((item) => (
-                <div style={{border: "1px solid black", padding: "20px", marginBottom: "10px" }} key={item.id}>
+                <div className={"event-card"} key={item.id}>
                     <Link to={`/admin/${item.id}`} style={{ color: "black" }}>
                         <Header name={item.title} type={"header"}/>
                     </Link>

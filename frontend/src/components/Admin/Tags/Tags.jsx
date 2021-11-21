@@ -42,13 +42,12 @@ const Tags = () => {
 
     return (
         <div>
-            <div style={{ marginBottom: "10px", display: "flex" }}>
+            <div className={"search"}>
                 <input type="text" placeholder={"Поиск по названию"}
                        value={search}
-                       style={{width: "calc(100% - 24px)", padding: "10px"}}
                        onChange={(e) => setSearch(e.target.value)}/>
                 <div>
-                    <button style={{background: "black", color: "white", padding: "12px 10px", border: "none", width: "200px"}} onClick={() => history.push("/admin/addteg")}>
+                    <button onClick={() => history.push("/admin/addteg")}>
                         Создать новый тег
                     </button>
                 </div>
