@@ -14,7 +14,8 @@ import { refresh } from './utils/api';
 
 
 function App() {
-    axios.defaults.baseURL = 'http://94.41.65.26';
+    axios.defaults.baseURL = window.location.host.includes('418.one') ? 'https://api.surent.418.one' : 'http://94.41.65.26';
+    console.log(axios.defaults.baseURL);
     axios.defaults.headers = {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + localStorage.access_token

@@ -9,8 +9,8 @@ function swagger(fastify) {
                 title: 'SurEnt API',
                 version: process.env.VERSION || 'local'
             },
-            host: process.env.NODE_ENV === 'staging' ? 'backend.staging.surent.418.one' :
-                process.env.NODE_ENV === 'production' ? 'backend.surent.418.one' :
+            host: process.env.NODE_ENV === 'staging' ? 'api.staging.surent.418.one' :
+                process.env.NODE_ENV === 'production' ? 'api.surent.418.one' :
                     // 'localhost:14400',
                     '94.41.65.26',
             schemes: ['http'],
