@@ -34,20 +34,24 @@ const CalendarHeader = (date) => {
     )
 }
 
-export function DataCalendar({data, onPress, ...props}) {
-    let datas = {}
-    Object.keys(data || {}).forEach((event) => {
-        if (data[event].length > 0) {
-            datas[event] = {marked: true}
+const getMarkedDates = (dates) => {
+    let markedDates = {}
+    Object.keys(dates || {}).forEach((event) => {
+        if (dates[event].length > 0) {
+            markedDates[event] = {marked: true}
         }
     })
-    console.log(datas)
+
+    return markedDates
+}
+
+export function DataCalendar({data, onPress, ...props}) {
     return (
         <Calendar
             onDayPress={(day) => onPress(day)}
             style={styles.calendarView}
             enableSwipeMonths={true}
-            markedDates={datas}
+            markedDates={getMarkedDates(data)}
             headerStyle={{
                 fontSize: 24
             }}
