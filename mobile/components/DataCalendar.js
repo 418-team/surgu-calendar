@@ -12,27 +12,6 @@ LocaleConfig.locales['ru'] = {
 };
 LocaleConfig.defaultLocale = 'ru';
 
-const getColorByState = (state) => {
-    if (state === 'disabled') return 'gray'
-    else if (state === 'today') return 'rgba(100, 200, 200, 0.8)'
-    return '#000000'
-}
-
-const CalendarHeader = (date) => {
-    const month = moment(date).format('MMMM').replace(/(^|\s)\S/g, l => l.toUpperCase())
-    const year = moment(date).format('YYYY')
-
-    return (
-        <View style={styles.calendarHeader}>
-            <Text style={styles.calendarHeaderMonth}>
-                {month}
-            </Text>
-            <Text style={styles.calendarHeaderYear}>
-                {year}
-            </Text>
-        </View>
-    )
-}
 
 const getMarkedDates = (dates) => {
     let markedDates = {}
