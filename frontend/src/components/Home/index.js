@@ -3,9 +3,11 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import ruLocale from '@fullcalendar/core/locales/ru'
 import moment from "moment";
+import {useHistory} from "react-router-dom";
+
+import {getEventByTimeseries} from "../../utils/api";
 
 import './styles.css'
-import {getEventByTimeseries} from "../../utils/api";
 
 const getCalendarEvents = (dates) => {
     let calendarEvents = []
@@ -15,7 +17,7 @@ const getCalendarEvents = (dates) => {
             dates[event].forEach((eventItem) => {
                 if (calendarEvents.filter(item => item?.title === eventItem?.title).length < 1)
                     calendarEvents.push({
-                        id,
+                        id: eventItem.id,
                         title: eventItem.title,
                         start: eventItem.start_date,
                         end: eventItem.end_date
@@ -28,6 +30,7 @@ const getCalendarEvents = (dates) => {
 }
 
 const Home = () => {
+    const history = useHistory();
     const [events, setEvents] = useState(null);
 
     useEffect(() => {
@@ -48,6 +51,10 @@ const Home = () => {
             locale={ruLocale}
             plugins={[ dayGridPlugin ]}
             initialView="dayGridMonth"
+            eventClick={(info) => {
+                console.log('info', info)
+                history.push(`/admin/${info.event.id}`)
+            }}
         />
     )
 }
