@@ -18,12 +18,19 @@
     justify-content: center;
 }
 
-.header > a {
+.header > button {
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background: none;
+}
+
+.header > a, .header > button {
     padding: 20px 10px;
     text-align: center;
 }
 
-.header > a:hover {
+.header > a:hover, .header > button:hover {
     background-color: rgba(239, 241, 245, 1);
 }
 

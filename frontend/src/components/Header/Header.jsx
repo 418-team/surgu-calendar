@@ -1,7 +1,7 @@
 import {
     Link
 } from "react-router-dom";
-import { IoHome, IoPerson, IoPeople, IoPricetagSharp } from "react-icons/io5";
+import {IoHome, IoPerson, IoPeople, IoPricetagSharp, IoExit} from "react-icons/io5";
 
 import "./header.css"
 
@@ -19,7 +19,7 @@ const Header = () => {
             <Link to="/admin"><IoPerson fontSize={iconSize} color={"black"} /></Link>
             <Link to="/admin/group"><IoPeople fontSize={iconSize} color={"black"} /></Link>
             <Link to="/admin/tags"><IoPricetagSharp fontSize={iconSize} color={"black"} /></Link>
-            <button onClick={logout}>Выйти</button>
+            <button onClick={logout}><IoExit fontSize={iconSize} color={"black"} /></button>
         </div>
     )
 }
