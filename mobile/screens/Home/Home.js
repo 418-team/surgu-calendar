@@ -36,6 +36,7 @@ export function HomeScreen({navigation}) {
         <ScrollView>
             {events ? <SafeAreaView>
                 <DataCalendar
+                    data={events}
                     onMonthChange={(month) => setCurrentMonth(month)}
                     onPress={(day) => {
                         setCurrentDay(day)

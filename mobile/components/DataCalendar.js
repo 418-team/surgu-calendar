@@ -34,23 +34,26 @@ const CalendarHeader = (date) => {
     )
 }
 
-export function DataCalendar({onPress, ...props}) {
+export function DataCalendar({data, onPress, ...props}) {
+    let datas = {}
+    Object.keys(data || {}).forEach((event) => {
+        if (data[event].length > 0) {
+            datas[event] = {marked: true}
+        }
+    })
+    console.log(datas)
     return (
         <Calendar
+            onDayPress={(day) => onPress(day)}
             style={styles.calendarView}
             enableSwipeMonths={true}
-            dayComponent={({date, state}) => {
-                return (
-                    <TouchableOpacity onPress={() => onPress(date)}  style={styles.dayButton}>
-                        <Text style={styles.dayText(state)}>
-                            {date?.day}
-                        </Text>
-                    </TouchableOpacity>
-                );
+            markedDates={datas}
+            headerStyle={{
+                fontSize: 24
             }}
-            renderHeader={CalendarHeader}
             theme={{
                 arrowColor: '#000000',
+                textDayFontSize: 18
             }}
             {...props}
         />
@@ -70,17 +73,5 @@ const styles = StyleSheet.create({
     },
     calendarView: {
       padding: 15
-    },
-    dayButton: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        minWidth: 37,
-        minHeight: 37,
-        backgroundColor: 'rgba(0, 0, 0, 0.03)',
-        borderRadius: 60
-    },
-    dayText: (state) => ({
-        fontSize: 18,
-        color: getColorByState(state),
-    })
+    }
 })
