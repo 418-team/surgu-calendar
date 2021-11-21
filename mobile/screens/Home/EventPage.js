@@ -14,7 +14,10 @@ import {getEventById} from "../../services/api";
 
 const renderBlock = (block, key) => {
     let styles = {
-        fontSize: 15
+        fontSize: 15,
+        borderBottomColor: '#000000',
+        borderBottomWidth: 1,
+        marginVertical: 10
     };
 
     if (block?.type === "header") {
@@ -25,7 +28,8 @@ const renderBlock = (block, key) => {
         styles.fontSize = 15
     }
 
-    return block?.type !== 'image' ? <Text style={styles} key={key}>{block?.value}</Text> :
+    return block?.type !== 'image' ?
+        <Text style={styles} key={key}>{block?.value}</Text> :
         <Image source={{uri: block?.value || ''}} />
 }
 
@@ -68,7 +72,7 @@ const styles = StyleSheet.create({
         padding: 10
     },
     eventTitle: {
-        fontSize: 24
+        fontSize: 26
     },
     eventDescription: {
         fontSize: 18,

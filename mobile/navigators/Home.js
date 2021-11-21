@@ -1,10 +1,10 @@
 import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createStackNavigator } from "@react-navigation/stack";
 
 import {HomeScreen} from "../screens/Home/Home";
 import { EventPage } from "../screens/Home/EventPage";
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 export default function Home() {
     return (

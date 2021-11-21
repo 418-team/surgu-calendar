@@ -33,7 +33,7 @@ export function HomeScreen({navigation}) {
     }, [currentMonth])
 
     return (
-        <ScrollView>
+        <ScrollView style={{backgroundColor: 'white'}}>
             {events ? <SafeAreaView>
                 <DataCalendar
                     data={events}
@@ -44,7 +44,7 @@ export function HomeScreen({navigation}) {
                 />
                 {currentDay && <View style={styles.infoView}>
                     <Text style={styles.infoDateText}>События ({moment(currentDay?.dateString).format('l')})</Text>
-                    <DataParser data={events[currentDay.dateString]}/>
+                    <DataParser data={events[currentDay?.dateString] || []}/>
                 </View>}
             </SafeAreaView> : <ActivityIndicator size={25} />}
         </ScrollView>

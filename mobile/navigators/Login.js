@@ -1,9 +1,9 @@
 import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { createStackNavigator } from "@react-navigation/stack";
 
 import {LoginScreen} from "../screens/Login/Login";
 
-const Stack = createNativeStackNavigator();
+const Stack = createStackNavigator();
 
 export default function Login() {
     return (

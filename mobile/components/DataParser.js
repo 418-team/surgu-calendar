@@ -37,22 +37,24 @@ const styles = StyleSheet.create({
     },
     eventTitle: {
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        maxWidth: 130
     },
     eventView: {
         marginVertical: 10,
         width: '100%',
-        borderWidth: 1,
-        borderRadius: 10,
         paddingHorizontal: 10,
         minHeight: 80,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        borderBottomWidth: 1,
+        paddingBottom: 5,
+        borderBottomColor: '#000000'
     },
     eventInfo: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: 5
+        padding: 5,
     },
     eventStartDate: {
         color: 'grey'
