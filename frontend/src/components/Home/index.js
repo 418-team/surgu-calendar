@@ -14,12 +14,12 @@ const getCalendarEvents = (dates) => {
         if (dates[event].length > 0) {
             dates[event].forEach((eventItem) => {
                 if (calendarEvents.filter(item => item?.title === eventItem?.title).length < 1)
-                calendarEvents.push({
-                    id,
-                    title: eventItem.title,
-                    start: eventItem.start_date,
-                    end: eventItem.end_date
-                })
+                    calendarEvents.push({
+                        id,
+                        title: eventItem.title,
+                        start: eventItem.start_date,
+                        end: eventItem.end_date
+                    })
             })
         }
     })
