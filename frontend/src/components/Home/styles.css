@@ -1,3 +1,7 @@
 .fc a {
     color: black;
 }
+
+.fc-event-title-container, .fc-event-main-frame {
+    background-color: #3788d8;
+}
