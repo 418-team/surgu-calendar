@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { auth } from '../../utils/api';
 import { useHistory } from 'react-router-dom';
 
+import './styles.css'
+
 const Auth = () => {
     const history = useHistory();
     const [email, setEmail] = useState('');
@@ -23,13 +25,13 @@ const Auth = () => {
     };
 
     return (
-        <>
-            <div>Авторизация</div>
+        <div className="auth_container">
+            <div className="auth_title">Авторизация</div>
             {error && <b>{error}</b>}
             <input type="text" placeholder="Email" onChange={(e) => (setEmail(e.currentTarget.value))}/>
             <input type="password" placeholder="Пароль" onChange={(e) => (setPassword(e.currentTarget.value))}/>
             <button onClick={submit}>Авторизоваться</button>
-        </>
+        </div>
     );
 };
 

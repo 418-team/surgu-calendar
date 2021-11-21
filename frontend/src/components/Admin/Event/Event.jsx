@@ -1,30 +1,11 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 import Preview from '../Preview/Preview';
 import { DynamicEditing } from '../Preview/DynamicEditing';
 import  {Redirect} from 'react-router-dom';
 import "../Admin.css"
 import axios from 'axios';
 import {makeIcsFile} from "../../shared/ICal"
-
-
-
-const useStateCallback = (initialState) => {
-    const [state, setState] = useState(initialState);
-    const cbRef = useRef(null); // init mutable ref container for callbacks
-    const setStateCallback = useCallback((_state, cb) => {
-        cbRef.current = cb;
-        setState(_state);
-    }, []);
-
-    useEffect(() => {
-        if (cbRef.current) {
-            cbRef.current(state);
-            cbRef.current = null;
-        }
-    }, [state]);
-    return [state, setStateCallback];
-}
-
+import { useStateCallback } from "../../../utils/hooks";
 
 const Event = ({match}) => {
     const id = match.params.id
