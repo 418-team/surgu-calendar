@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Text, StyleSheet, Pressable, ScrollView} from "react-native";
+import {View, Text, StyleSheet, Pressable, ScrollView, TouchableOpacity} from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import moment from "moment";
 
@@ -9,7 +9,7 @@ export function DataParser({data}) {
     return (
         <ScrollView contentContainerStyle={styles.eventContainer}>
             {Object.keys(data || {}).length > 0 ? Object.keys(data).map((event, id) =>
-                <Pressable style={styles.eventView} key={id} onPress={() => navigation.navigate('EventScreen', {
+                <TouchableOpacity style={styles.eventView} key={id} onPress={() => navigation.navigate('EventScreen', {
                     id: data[event].id
                 })}>
                     <View style={styles.eventInfo}>
@@ -24,7 +24,7 @@ export function DataParser({data}) {
                             }
                         </Text>
                     </View>
-                </Pressable>
+                </TouchableOpacity>
             ) : <Text style={styles.noEventsText}>Событий нет</Text>}
         </ScrollView>
     )
