@@ -35,3 +35,34 @@ jobs:
         run: |
           docker push cr.yandex/crpt0p11mpru2thprleg/backend:${{ steps.version.outputs.TAG_NAME }}
           docker push cr.yandex/crpt0p11mpru2thprleg/backend:latest
+
+  deploy:
+    needs: [ build ]
+    runs-on: ubuntu-latest
+    environment:
+      name: Production - Backend
+      url: https://api.surent.418.one
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Retrieve version
+        id: version
+        run: echo "::set-output name=TAG_NAME::ci-${{ github.run_number }}"
+
+      - name: Setup SSH
+        run: |
+          mkdir ~/.ssh/
+          ssh-keyscan -t rsa ${{ secrets.REMOTE_HOST }} > ~/.ssh/known_hosts
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/docker
+          chmod 600 ~/.ssh/docker
+          echo "${{ secrets.SSH_CONFIG }}" > ~/.ssh/config
+
+      - name: Docker Login
+        env:
+          YC_AUTH_KEY: ${{ secrets.YC_AUTH_KEY }}
+        run: echo "$YC_AUTH_KEY" | docker login --username json_key --password-stdin cr.yandex
+
+      - name: Docker update service
+        run: docker service update --with-registry-auth --image cr.yandex/crpt0p11mpru2thprleg/backend:${{ steps.version.outputs.TAG_NAME }} surgu_backend
+        env:
+          DOCKER_HOST: "ssh://${{ secrets.REMOTE_HOST }}"
