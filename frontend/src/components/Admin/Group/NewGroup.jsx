@@ -15,7 +15,7 @@ const NewGroup = () => {
         axios.post("/groups/create", {
             ...data
         }).then((res) => {
-            history.push(`/group/${res.data.id}`)
+            history.push(`/admin/group/${res.data.id}`)
         })
     }
 

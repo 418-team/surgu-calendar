@@ -1,20 +1,27 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Preview from '../Preview/Preview';
 import { DynamicEditing } from '../Preview/DynamicEditing';
 import  {Redirect} from 'react-router-dom';
 import "../Admin.css"
 import axios from 'axios';
-import {makeIcsFile} from "../../shared/ICal"
 import { useStateCallback } from "../../../utils/hooks";
 
 const Event = ({match}) => {
     const id = match.params.id
+    const [tags, setTags] = useState()
+    const [groups, setGroups] = useState()
     const [data, setData] = useStateCallback({})
 
     useEffect(() => {
         axios.get(`/events/${id}`).then((res) => {
             const data = {...res.data.event, data: JSON.parse(res.data.event?.data || "[]")}
             setData(data)
+        })
+        axios.get("/tags/list").then((res) => {
+            setTags(res.data.rows)
+        })
+        axios.get("/groups/list").then((res) => {
+            setGroups(res.data.rows)
         })
     }, [id])
 
@@ -23,8 +30,11 @@ const Event = ({match}) => {
     }
 
     const applyChanges = () => {
+        const _data = {...data}
+        _data.tags = _data.tags.map((tag) => tag.id)
+        _data.groups = _data.groups.map((group) => group.id)
         axios.put(`/events/${id}`, {
-            ...data,
+            ..._data,
             data: JSON.stringify(data.data || [])
         }).then(() => {
             axios.get(`/events/${id}`).then((res) => {
@@ -36,17 +46,8 @@ const Event = ({match}) => {
 
     return !data ? <Redirect to={"/admin"}/> : (
         <div>
-            <DynamicEditing data={data} setData={set} onSave={applyChanges}/>
+            <DynamicEditing data={data} setData={set} groups={groups} tags={tags} onSave={applyChanges}/>
             <Preview data={data}/>
-            {data?.start_date &&
-                <button
-                    style={{ padding: "10px", background: "black", color: "white", border: "none", marginTop: "10px" }}
-                    onClick={() =>
-                        makeIcsFile({start: data?.start_date, end: data.end_date}, data.title, data.description)}
-                >
-                    Загрузить в календарь
-                </button>
-            }
         </div>
     )
 }

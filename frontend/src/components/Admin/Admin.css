@@ -50,9 +50,12 @@ p {
 }
 
 .field {
+    border-radius: 10px;
     width: calc(100% - 80px);
     font-size: 16px;
+    border: transparent;
     padding: 10px 60px 10px 20px;
+    box-shadow: 3px 3px 8px 0 rgba(0,0, 0, 0.1);
 }
 
 .field-label {
@@ -72,6 +75,7 @@ p {
     margin-top: 20px;
     font-size: 14px;
     position: relative;
+    box-shadow: 3px 3px 8px 0 rgba(0,0, 0, 0.1);
 }
 
 .type-select {
@@ -79,8 +83,7 @@ p {
     display: flex;
     align-items: flex-start;
     padding: 10px;
-    background: #fafafa;
-    border: 1px solid black;
+    background: white;
     border-radius: 10px;
 }
 
@@ -120,6 +123,22 @@ input {
 }
 .createNewEvent {
     margin-top: 100px;
+}
+
+.tag {
+    font-size: 12px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 3px 3px 8px 0 rgba(0,0, 0, 0.1);
+    padding: 3px 6px
+}
+
+.tag + .tag {
+    margin-left: 10px;
+}
+
+.preview {
+    padding: 10px 20px
 }
 
 .createNewEvent input[type="text"] {
