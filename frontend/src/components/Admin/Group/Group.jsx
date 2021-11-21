@@ -7,7 +7,6 @@ import { useStateCallback } from "../../../utils/hooks";
 
 import AddItem from '../Preview/DynamicEditing/AddItem';
 
-
 const Group = ({match}) => {
     const id = match.params.id
     const [data, setData] = useStateCallback(null)

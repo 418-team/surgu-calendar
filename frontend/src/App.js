@@ -48,7 +48,7 @@ function App() {
             return Promise.reject(error);
         }
     );
-    moment.locale('ru', [ruLocale]);
+    moment.updateLocale('ru', [ruLocale]);
 
     return (
         <div className="App">

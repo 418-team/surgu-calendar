@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+// OAuth
 export async function auth(username, password) {
     return await axios.post('oauth/authorize',
         JSON.stringify({username, password})
@@ -27,4 +28,14 @@ export async function oauthRefresh() {
     return await axios.post('oauth/refresh',
         JSON.stringify({refresh_token: localStorage.getItem('refresh_token')})
     );
+}
+
+// Event
+export async function getEventByTimeseries(date, range="month") {
+    return await axios.get('events/timeseries', {
+        params: {
+            date,
+            range
+        }
+    })
 }
