@@ -1,16 +1,22 @@
 .App {
-  background-color: rgb(238, 240, 242);
+    background-color: rgb(238, 240, 242);
 }
 
 input:focus {
-  outline: none;
+    outline: none;
 }
 
 input[type="text"], input[type="email"], input[type="password"] {
-  border-radius: 10px;
-  width: calc(100% - 80px);
-  font-size: 16px;
-  border: transparent;
-  padding: 10px 60px 10px 20px;
-  box-shadow: 3px 3px 8px 0 rgba(0,0, 0, 0.1);
+    border-radius: 10px;
+    width: calc(100% - 80px);
+    background: white !important;
+    border: none !important;
+    font-size: 16px;
+    border: transparent;
+    padding: 10px 60px 10px 20px;
+    box-shadow: 3px 3px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin-top: 0;
 }

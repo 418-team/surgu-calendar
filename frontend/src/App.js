@@ -7,7 +7,7 @@ import ruLocale from 'moment/locale/ru';
 import moment from 'moment';
 import axios from 'axios';
 
-import "./App.css"
+import './App.css';
 
 import PrivateRoute from './components/PrivateRoute';
 import AdminRouter from './components/AdminRouter';
@@ -15,7 +15,7 @@ import Auth from './components/Auth';
 import { refresh } from './utils/api';
 
 function App() {
-    axios.defaults.baseURL = window.location.host.includes('418.one') ? 'https://api.surent.418.one' : 'http://94.41.65.26';
+    axios.defaults.baseURL = window.location.host.includes('localhost') ? 'https://api.surent.418.one' : 'http://94.41.65.26';
     console.log(axios.defaults.baseURL);
     axios.defaults.headers = {
         'Content-Type': 'application/json',

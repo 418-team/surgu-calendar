@@ -8,7 +8,8 @@
 
 .auth_title {
     font-size: 24px;
-    margin-bottom: 10px;
+    font-weight: 500;
+    margin-bottom: 20px;
 }
 
 .auth_container input {
@@ -17,14 +18,19 @@
     outline: none;
     border-bottom: 1px solid #000000;
     background-color: rgb(238, 240, 242);
-    padding: 5px;
+    min-height: 25px;
     font-size: 16px;
+    width: 80%;
+    max-width: 400px;
 }
 
 .auth_container button {
     outline: none;
     background: none;
     border: 1px solid #000000;
+    background: black;
+    color: white;
+    border-radius: 10px;
     padding: 10px;
     font-size: 16px;
     cursor: pointer;
