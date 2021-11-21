@@ -34,7 +34,7 @@ const CalendarHeader = (date) => {
     )
 }
 
-export function DataCalendar({onPress}) {
+export function DataCalendar({onPress, ...props}) {
     return (
         <Calendar
             style={styles.calendarView}
@@ -52,6 +52,7 @@ export function DataCalendar({onPress}) {
             theme={{
                 arrowColor: '#000000',
             }}
+            {...props}
         />
     )
 }

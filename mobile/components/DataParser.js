@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Text, StyleSheet, Pressable} from "react-native";
+import {View, Text, StyleSheet, Pressable, ScrollView} from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import moment from "moment";
 
@@ -7,21 +7,26 @@ export function DataParser({data}) {
     const navigation = useNavigation();
 
     return (
-        <View style={styles.eventContainer}>
-            {data.map((event, id) =>
+        <ScrollView contentContainerStyle={styles.eventContainer}>
+            {Object.keys(data || {}).length > 0 ? Object.keys(data).map((event, id) =>
                 <Pressable style={styles.eventView} key={id} onPress={() => navigation.navigate('EventScreen', {
-                    id: event.id
+                    id: data[event].id
                 })}>
                     <View style={styles.eventInfo}>
                         <View>
-                            <Text style={styles.eventTitle}>{event?.title}</Text>
-                            <Text style={styles.eventStartDate}>{moment(event?.start_date).calendar()}</Text>
+                            <Text style={styles.eventTitle}>{data[event]?.title}</Text>
+                            <Text style={styles.eventStartDate}>{moment(data[event]?.start_date).calendar()}</Text>
                         </View>
-                        <Text style={styles.eventTimeLeft}>{moment(event?.start_date).fromNow()}</Text>
+                        <Text style={styles.eventTimeLeft}>
+                            {moment(data[event]?.start_date).isAfter(moment()) ?
+                                'Начало ' +  moment(data[event]?.start_date).fromNow() :
+                                'Конец ' +  moment(data[event]?.end_date).fromNow()
+                            }
+                        </Text>
                     </View>
                 </Pressable>
-            )}
-        </View>
+            ) : <Text style={styles.noEventsText}>Событий нет</Text>}
+        </ScrollView>
     )
 }
 
@@ -55,5 +60,9 @@ const styles = StyleSheet.create({
     eventTimeLeft: {
         fontSize: 15,
         fontWeight: 'bold'
+    },
+    noEventsText: {
+        fontSize: 24,
+        marginTop: 30
     }
 })

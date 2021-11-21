@@ -5,34 +5,47 @@ import moment from "moment";
 
 import { DataParser } from "../../components/DataParser";
 import {DataCalendar} from "../../components/DataCalendar";
-import {getEvents} from "../../services/api";
+import {getEventByTime, getEvents} from "../../services/api";
+import {getDataFromStorage} from "../../services/storage";
 
-export function HomeScreen() {
+export function HomeScreen({navigation}) {
     const [events, setEvents] = useState(null);
-    const [currentDay, setCurrentDay] = useState(moment().format('dd-mm-yy'));
+    const [currentDay, setCurrentDay] = useState(moment().format('yy-mm-dd'));
+    const [currentMonth, setCurrentMonth] = useState(null);
 
     useEffect(() => {
-        getEvents()
+        const checkDataInStorage = async () => {
+            if (!await getDataFromStorage('access_token') || !await getDataFromStorage('refresh_token')) {
+                navigation.navigate('Login')
+            }
+        }
+
+        checkDataInStorage()
+    }, [])
+
+    useEffect(() => {
+        getEventByTime(currentDay)
             .then(({data}) => {
                 console.log(data)
-                setEvents(data?.rows)
+                setEvents(data?.data)
             })
             .catch((err) => console.warn(err))
-    }, [currentDay])
+    }, [currentMonth])
 
     return (
         <ScrollView>
             {events ? <SafeAreaView>
                 <DataCalendar
+                    onMonthChange={(month) => setCurrentMonth(month)}
                     onPress={(day) => {
                         setCurrentDay(day)
                     }}
                 />
                 {currentDay && <View style={styles.infoView}>
                     <Text style={styles.infoDateText}>События ({moment(currentDay?.dateString).format('l')})</Text>
-                    <DataParser data={events}/>
+                    <DataParser data={events[currentDay.dateString]}/>
                 </View>}
-            </SafeAreaView> : <ActivityIndicator />}
+            </SafeAreaView> : <ActivityIndicator size={25} />}
         </ScrollView>
     )
 }

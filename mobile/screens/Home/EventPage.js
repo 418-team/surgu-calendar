@@ -13,42 +13,8 @@ import {
 } from "react-native";
 import {SafeAreaView} from "react-native-safe-area-context";
 import moment from "moment";
+
 import {getEventById} from "../../services/api";
-
-const createAndOpenISC = async (dates, summary, description) => {
-    try {
-        const test =`
-        BEGIN:VCALENDAR
-        CALSCALE:GREGORIAN
-        METHOD:PUBLISH
-        PRODID:-//418Team//EN
-        VERSION:2.0
-        BEGIN:VEVENT
-        UID:test
-        DTSTART;VALUE=DATE:${dates?.start}
-        DTEND;VALUE=DATE:${dates?.end}
-        SUMMARY:${summary}
-        DESCRIPTION: ${description}
-        END:VEVENT
-        END:VCALENDAR
-    `
-        await Linking.openURL("content://data:text/calendar;charset=utf8," + escape(test))
-    } catch (e) {
-        console.warn(e)
-    }
-}
-
-const SendIntentButton = ({ action, extras, children }) => {
-    const handlePress = useCallback(async () => {
-        try {
-            await Linking.sendIntent(action, extras);
-        } catch (e) {
-            Alert.alert(e.message);
-        }
-    }, [action, extras]);
-
-    return <Button title={children} onPress={handlePress} />;
-};
 
 const renderBlock = (block, key) => {
     let styles = {
@@ -84,37 +50,33 @@ export function EventPage({route, navigation}) {
 
     return (
         <ScrollView contentInsetAdjustmentBehavior="automatic">
-            {event ? <SafeAreaView>
-                <Text>{event.event?.title}</Text>
-                <Text>{event.event?.description}</Text>
+            {event ? <SafeAreaView style={styles.eventContainer}>
+                <Text style={styles.eventTitle}>{event.event?.title}</Text>
+                <Text style={styles.eventDescription}>{event.event?.description}</Text>
                 {event.event?.picture_img &&
-                <Image source={{uri: event.event?.picture_img}} style={{width: '100%', height: 300, objectFit: 'cover'}}/>}
+                    <Image source={{uri: event.event?.picture_img}} style={{width: '100%', height: 300, objectFit: 'cover'}}/>}
                 {eventContent?.map(renderBlock)}
-
                 <Text>{moment(event.event?.start_date).fromNow()}</Text>
                 <View style={styles.eventTags}>
                     {event?.tags?.map((tag) =>
                         <Text style={styles.eventTag} key={tag?.id}>{tag?.title}</Text>
                     )}
                 </View>
-                <Pressable onPress={() => createAndOpenISC({start: event.event?.start_date, end: event.event?.end_date}, event.event?.title, event.event?.description)}>
-                    <Text>Download</Text>
-                </Pressable>
-                <SendIntentButton action={'android.intent.action.INSERT'} extras={{'TITLE': 'TEST'}}>
-                    <Text>Download</Text>
-                </SendIntentButton>
-            </SafeAreaView> : <ActivityIndicator />}
+            </SafeAreaView> : <ActivityIndicator size={25} />}
         </ScrollView>
     )
 }
 
 const styles = StyleSheet.create({
     eventContainer: {
-        alignItems: 'center',
-        justifyContent: 'center',
+        padding: 10
     },
     eventTitle: {
-        fontSize: 20
+        fontSize: 24
+    },
+    eventDescription: {
+        fontSize: 18,
+        marginBottom: 10
     },
     eventView: {
         marginVertical: 10,
