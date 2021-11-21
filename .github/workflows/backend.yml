@@ -3,7 +3,7 @@ name: Production - Backend
 on:
   workflow_dispatch:
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths:
       - backend/**
       - .github/workflows/backend.yml
