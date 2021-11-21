@@ -13,15 +13,15 @@ function createSession(user) {
     const refreshData = {uid: user.id, refresh: 1};
 
     return {
-        accessToken: jwt.sign(jwtData, process.env.JWT_SECRET_KEY, {expiresIn: '5m'}),
-        refreshToken: jwt.sign(refreshData, process.env.JWT_SECRET_KEY, {expiresIn: '5d'})
+        accessToken: jwt.sign(jwtData, process.env.JWT_SECRET_KEY, {expiresIn: '3d'}),
+        refreshToken: jwt.sign(refreshData, process.env.JWT_SECRET_KEY, {expiresIn: '14d'})
     };
 }
 
 async function AuthCheck(request, reply) {
     const security = request.context?.schema?.security;
     if (!security || !security[0]?.OAuth2) return Promise.resolve();
-
+    
     const scopes = security[0]?.OAuth2;
     console.log(1, scopes);
 

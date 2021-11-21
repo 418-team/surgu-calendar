@@ -12,7 +12,7 @@ const TIMESERIES_SQL = `
                   FROM events e
                   WHERE x::date >= e.start_date::date
                     AND x::date <= e.end_date::date) agg)
-    FROM generate_series(date_trunc('month', $1::date), date_trunc('month', $1::date) + '1 month'::interval,
+    FROM generate_series(date_trunc($2, $1::date), date_trunc($2, $1::date) + ('1 ' || $2)::interval,
                          '1 day'::interval) t(x)
 `;
 
@@ -22,7 +22,7 @@ const isValidDate = (d) => {
 
 async function handler(req, res) {
     let date = isValidDate(new Date(req.query.date)) ? new Date(req.query.date) : new Date();
-    const {rows} = await req.pg.query(TIMESERIES_SQL, [date]);
+    const {rows} = await req.pg.query(TIMESERIES_SQL, [date, req.query.range || 'month']);
 
     const data = rows.reduce((accumulator, currentValue) => {
         accumulator[currentValue.date] = currentValue.events;
@@ -37,10 +37,12 @@ const params = {
     schema: {
         tags: ['events'],
         summary: 'Получить список событий с группировкой по дням (TimeSeries)',
+        description: 'В range передаётся year или month',
         query: {
             type: 'object',
             properties: {
-                date: {type: 'string'}
+                date: {type: 'string'},
+                range: {type: 'string', example: 'year', default: 'month'}
             }
         },
         response: {
